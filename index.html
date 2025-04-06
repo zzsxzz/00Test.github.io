@@ -167,27 +167,7 @@
         // Встановлюємо поточну дату в поле
         date = getCurrentDate();
         document.getElementById('date-input').value = date;
-
-        // Додаємо подію для відкриття календаря при натисканні на кнопку
-        document.getElementById('calendar-button').addEventListener('click', function () {
-            // Створюємо невидиме поле для вибору дати
-            const inputDate = document.createElement('input');
-            inputDate.setAttribute('type', 'date');
-            inputDate.value = date.split('.').reverse().join('-'); // Формат для date input
-            inputDate.style.position = 'absolute';
-            inputDate.style.top = '-9999px'; // Приховуємо його за межами екрана
-            document.body.appendChild(inputDate);
-            
-            // Відкриваємо календар
-            inputDate.click();
-
-            // При виборі нової дати, оновлюємо значення
-            inputDate.addEventListener('change', function () {
-                const newDate = inputDate.value.split('-').reverse().join('.');
-                date = newDate;
-                document.getElementById('date-input').value = date;
-                document.body.removeChild(inputDate); // Прибираємо тимчасове поле для вибору
-            });
+        
         });
     </script>
 </body>
