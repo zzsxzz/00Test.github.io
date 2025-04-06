@@ -68,10 +68,16 @@
       width: 60%; /* встановлена ширина на 60% */
     }
     
-    .field3 { background-color: yellow; }
-    .field4 { 
+    /* Поля 3 та 4 налаштовуємо на залишковий простір */
+    .field3 {
+      background-color: yellow;
+      flex-grow: 1; /* Займає залишкову ширину */
+    }
+
+    .field4 {
       background-color: black;
       padding: 20px;
+      flex-grow: 1; /* Займає залишкову ширину */
     }
     
     /* Стиль для форм */
