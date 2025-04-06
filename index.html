@@ -80,7 +80,18 @@
             display: flex;
             flex-direction: column;
         }
-        
+
+        /* Стиль для введення дати */
+        input[type="text"].date-display {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 11ch; /* Ширина комірки для дати становить 11 символів */
+            background-color: #f0f0f0; /* Фоновий колір для поля */
+            cursor: not-allowed; /* Курсор "неможливо" для заборони редагування */
+        }
+
         /* Стиль для текстового поля */
         .text-input {
             padding: 10px;
@@ -88,17 +99,6 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             width: 25ch; /* Ширина комірки для тексту становить 25 символів */
-        }
-        
-        /* Стиль для введення дати */
-        input[type="text"].date-display {
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 11ch; /* Ширина комірки для дати становить 25 символів */
-            background-color: #f0f0f0; /* Фоновий колір для поля */
-            cursor: not-allowed; /* Курсор "неможливо" для заборони редагування */
         }
 
         /* Відступи між полями */
@@ -113,10 +113,11 @@
         <div class="row1">
             <div class="field field1">
                 <div class="form-container">
-                    <!-- Друге поле: текстове введення -->
+                    <!-- Перше поле: текстове введення -->
                     <label for="text-input">Текст:</label>
                     <input type="text" id="text-input" class="text-input" placeholder="Введіть текст" />
-                    <!-- Перше поле: тільки відображення дати -->
+                    
+                    <!-- Друге поле: тільки відображення дати -->
                     <label for="date-display">Дата:</label>
                     <input type="text" id="date-display" class="date-display" readonly />
                 </div>
