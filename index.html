@@ -92,7 +92,7 @@
             margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
-            width: 16ch; /* Ширина комірки для дати 16 символів */
+            width: 16ch; /* Ширина комірки для дати */
             background-color: #f0f0f0; /* Фоновий колір для поля */
             text-align: center;
         }
@@ -161,6 +161,7 @@
 
         // Додаємо подію для збереження текстового формату після втрати фокусу
         document.getElementById('date-input').addEventListener('blur', function () {
+            // Якщо поле порожнє, ставимо поточну дату
             if (this.value === '') {
                 this.value = getCurrentDate(); // Якщо дата не вибрана, ставимо актуальну
             } else {
