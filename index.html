@@ -137,7 +137,7 @@
                     <!-- Друге поле: тільки відображення дати з кнопкою календаря -->
                     <label for="date-display">Дата:</label>
                     <div class="date-display-container">
-                        <input type="text" id="date-display" class="date-display" readonly />
+                        <input type="text" id="date-display" class="date-display" value="" readonly />
                         <button class="calendar-button" id="calendar-button">📅</button>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
 
         // Функція для відкриття календаря при натисканні на кнопку
         document.getElementById('calendar-button').addEventListener('click', function () {
-            // Створюємо невидиме поле для вибору дати
+            // Перетворюємо поле для відображення на поле для вибору дати
             const inputDate = document.createElement('input');
             inputDate.setAttribute('type', 'date');
             inputDate.value = date.split('.').reverse().join('-'); // Формат для date input
