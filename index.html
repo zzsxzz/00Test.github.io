@@ -131,6 +131,9 @@
     </div>
 
     <script>
+        // Змінна для зберігання дати
+        let date = '';
+
         // Функція для отримання поточної дати в форматі dd.mm.yyyy
         function getCurrentDate() {
             const today = new Date();
@@ -141,9 +144,10 @@
         }
 
         // Встановлюємо поточну дату в поле
-        document.getElementById('date-input').value = getCurrentDate();
+        date = getCurrentDate();
+        document.getElementById('date-input').value = date;
 
-        // Додаємо подію для відображення календаря при кліку
+        // Додаємо подію для відображення календаря при фокусі на полі
         document.getElementById('date-input').addEventListener('focus', function () {
             this.type = 'date';
         });
@@ -153,13 +157,17 @@
             if (this.value === '') {
                 this.value = getCurrentDate(); // Якщо дата не вибрана, ставимо актуальну
             } else {
-                const date = new Date(this.value);
-                const formattedDate = String(date.getDate()).padStart(2, '0') + '.' +
-                    String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
-                this.value = formattedDate;
+                const dateValue = new Date(this.value);
+                const formattedDate = String(dateValue.getDate()).padStart(2, '0') + '.' +
+                    String(dateValue.getMonth() + 1).padStart(2, '0') + '.' + dateValue.getFullYear();
+                date = formattedDate; // Оновлюємо значення дати
+                this.value = date;
             }
-            this.type = 'text'; // Знову ставимо тип тексту
+            this.type = 'text'; // Повертаємо поле назад в текстовий формат
         });
+
+        // Відображаємо актуальну дату на сторінці
+        document.getElementById('date-input').value = date;
     </script>
 </body>
 </html>
