@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вебсторінка з 4 полями</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Підключення Font Awesome -->
     <style>
         /* Загальні стилі для сторінки */
         body, html {
@@ -99,10 +98,15 @@
             text-align: center;
         }
 
-        .calendar-icon {
+        /* Кнопка для відкриття календаря */
+        .calendar-button {
+            margin-left: 10px;
+            padding: 8px;
             font-size: 18px;
-            margin-right: 8px;
             cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f0f0f0;
         }
 
         /* Стиль для текстового поля */
@@ -130,11 +134,11 @@
                     <label for="text-input">Текст:</label>
                     <input type="text" id="text-input" class="text-input" placeholder="Введіть текст" />
                     
-                    <!-- Друге поле: тільки відображення дати з піктограмою календаря -->
+                    <!-- Друге поле: тільки відображення дати з кнопкою календаря -->
                     <label for="date-display">Дата:</label>
                     <div class="date-display-container">
-                        <i class="fas fa-calendar-alt calendar-icon" id="calendar-icon"></i>
                         <input type="text" id="date-display" class="date-display" readonly />
+                        <button class="calendar-button" id="calendar-button">📅</button>
                     </div>
                 </div>
             </div>
@@ -165,9 +169,9 @@
         date = getCurrentDate();
         document.getElementById('date-display').value = date;
 
-        // Функція для відкриття календаря при натисканні на іконку
-        document.getElementById('calendar-icon').addEventListener('click', function () {
-            // Відкриваємо діалогове вікно для вибору дати
+        // Функція для відкриття календаря при натисканні на кнопку
+        document.getElementById('calendar-button').addEventListener('click', function () {
+            // Створюємо невидиме поле для вибору дати
             const inputDate = document.createElement('input');
             inputDate.setAttribute('type', 'date');
             inputDate.value = date.split('.').reverse().join('-'); // Формат для date input
