@@ -135,8 +135,7 @@
                     
                     <!-- Друге поле: введення дати -->
                     <label for="date-input">Дата:</label>
-                    <input type="text" id="date-input" class="date-display" placeholder="dd.mm.yyyy" />
-                     // <button class="calendar-button" id="calendar-button">📅</button>
+                    <input type="text" id="text-input" class="text-input" placeholder="dd.mm.yyyy" />
                     </div>
                 </div>
             </div>
@@ -165,7 +164,7 @@
 
         // Встановлюємо поточну дату в поле
         date = getCurrentDate();
-        document.getElementById('date-input').value = date;
+        document.getElementById('text-input').value = date;
         
         });
     </script>
