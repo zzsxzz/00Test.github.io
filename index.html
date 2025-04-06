@@ -58,6 +58,9 @@
         .field1 {
             background-color: red;
             margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
         }
 
         .field2 {
@@ -72,12 +75,48 @@
             background-color: black;
         }
 
+        /* Стиль для форм */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="date"] {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Стиль для текстових полів */
+        .text-input {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Відступи між полями */
+        .form-container input {
+            margin-bottom: 10px;
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <div class="row1">
-            <div class="field field1"></div>
+            <div class="field field1">
+                <div class="form-container">
+                    <!-- Перше поле: введення дати -->
+                    <label for="date-input">Дата:</label>
+                    <input type="text" id="date-input" placeholder="dd.mm.yyyy" />
+                    
+                    <!-- Друге поле: текстове введення -->
+                    <label for="text-input">Текст:</label>
+                    <input type="text" id="text-input" class="text-input" placeholder="Введіть текст" />
+                </div>
+            </div>
             <div class="field field2"></div>
         </div>
         <div class="row2">
@@ -87,5 +126,37 @@
             <div class="field field4"></div>
         </div>
     </div>
+
+    <script>
+        // Функція для отримання поточної дати в форматі dd.mm.yyyy
+        function getCurrentDate() {
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Місяці від 0 до 11
+            const year = today.getFullYear();
+            return `${day}.${month}.${year}`;
+        }
+
+        // Встановлюємо поточну дату в поле
+        document.getElementById('date-input').value = getCurrentDate();
+
+        // Додаємо подію для відображення календаря при кліку
+        document.getElementById('date-input').addEventListener('focus', function () {
+            this.type = 'date';
+        });
+
+        // Додаємо подію для збереження текстового формату після втрати фокусу
+        document.getElementById('date-input').addEventListener('blur', function () {
+            if (this.value === '') {
+                this.value = getCurrentDate(); // Якщо дата не вибрана, ставимо актуальну
+            } else {
+                const date = new Date(this.value);
+                const formattedDate = String(date.getDate()).padStart(2, '0') + '.' +
+                    String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
+                this.value = formattedDate;
+            }
+            this.type = 'text'; // Знову ставимо тип тексту
+        });
+    </script>
 </body>
 </html>
