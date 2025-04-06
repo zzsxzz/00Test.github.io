@@ -81,15 +81,29 @@
             flex-direction: column;
         }
 
-        /* Стиль для поля дати */
-        .date-display {
+        /* Стиль для введення дати */
+        input[type="text"].date-display {
             padding: 10px;
             margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
-            width: auto; /* ширина підлаштовується під вміст */
-            background-color: #f0f0f0; /* фоновий колір для поля */
-            cursor: not-allowed; /* курсор "неможливо" для заборони редагування */
+            width: 25ch; /* Ширина комірки для дати становить 25 символів */
+            background-color: #f0f0f0; /* Фоновий колір для поля */
+            cursor: not-allowed; /* Курсор "неможливо" для заборони редагування */
+        }
+
+        /* Стиль для текстового поля */
+        .text-input {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 25ch; /* Ширина комірки для тексту становить 25 символів */
+        }
+
+        /* Відступи між полями */
+        .form-container input {
+            margin-bottom: 10px;
         }
 
     </style>
