@@ -13,6 +13,7 @@
             width: 100%;
             display: flex;
             justify-content: center;
+            align-items: center;
         }
 
         /* Контейнер для всіх рядків */
@@ -21,7 +22,8 @@
             flex-direction: column;
             height: 100%;
             width: 100%;
-            max-width: 960px; /* максимальна ширина контейнера */
+            min-width: 960px; /* мінімальна ширина контейнера */
+            max-width: 1920px; /* максимальна ширина контейнера */
             box-sizing: border-box;
         }
 
@@ -64,13 +66,6 @@
 
         .field4 {
             background-color: black;
-        }
-
-        /* Адаптивний дизайн для ширини вікна більших за 960px */
-        @media (min-width: 960px) {
-            .container {
-                width: 100%;
-            }
         }
 
     </style>
