@@ -128,55 +128,64 @@
     </div>
   </div>
   
-  <script>
-    // Глобальні змінні для зберігання дати та тексту
-    let date = '';
-    let Full_name = '';
-    
-    // Функція для отримання поточної дати у форматі dd.mm.yyyy
-    function getCurrentDate() {
-      const today = new Date();
-      const day = String(today.getDate()).padStart(2, '0');
-      const month = String(today.getMonth() + 1).padStart(2, '0');
-      const year = today.getFullYear();
-      return `${day}.${month}.${year}`;
-    }
-    
-    // Ініціалізація поля для дати з поточною датою
-    const dateInput = document.getElementById('date-input');
-    date = getCurrentDate();
-    dateInput.value = date;
-    
-    // Оновлення змінної Full_name при введенні тексту
-    const textInput = document.getElementById('text-input');
-    textInput.addEventListener('input', function() {
-      Full_name = this.value;
-      // Більше не оновлюємо відображення в Поле4
-    });
-    
-    // Обробка подій для віджета календаря:
-    // При фокусі змінюємо тип поля на "date" та конвертуємо дату в формат YYYY-MM-DD
-    dateInput.addEventListener('focus', function() {
-      this.type = 'date';
-      const parts = date.split('.');
-      if (parts.length === 3) {
-        this.value = `${parts[2]}-${parts[1]}-${parts[0]}`;
-      }
-    });
-    
-    // При зміні дати через віджет оновлюємо глобальну змінну
-    dateInput.addEventListener('change', function() {
-      const parts = this.value.split('-'); // формат YYYY-MM-DD
-      if (parts.length === 3) {
-        date = `${parts[2]}.${parts[1]}.${parts[0]}`;
-      }
-    });
-    
-    // При втраті фокусу повертаємо тип поля на "text" і відображаємо останню вибрану дату
-    dateInput.addEventListener('blur', function() {
-      this.type = 'text';
-      this.value = date;
-    });
-  </script>
+ <script>
+  // Глобальні змінні для зберігання дати та тексту
+  let date = '';
+  let Full_name = '';
+
+  // Функція для отримання поточної дати у форматі dd.mm.yyyy
+  const getCurrentDate = () => {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+    return `${day}.${month}.${year}`;
+  };
+
+  // Допоміжна функція для конвертації дати з формату dd.mm.yyyy у YYYY-MM-DD
+  const convertDateToInputFormat = (dateStr) => {
+    const parts = dateStr.split('.');
+    return parts.length === 3 ? `${parts[2]}-${parts[1]}-${parts[0]}` : dateStr;
+  };
+
+  // Допоміжна функція для конвертації дати з формату YYYY-MM-DD у dd.mm.yyyy
+  const convertDateToDisplayFormat = (dateStr) => {
+    const parts = dateStr.split('-');
+    return parts.length === 3 ? `${parts[2]}.${parts[1]}.${parts[0]}` : dateStr;
+  };
+
+  // Кешування посилань на DOM-елементи
+  const dateInput = document.getElementById('date-input');
+  const textInput = document.getElementById('text-input');
+
+  // Ініціалізація дати
+  date = getCurrentDate();
+  dateInput.value = date;
+
+  // Оновлення глобальної змінної для тексту
+  textInput.addEventListener('input', () => {
+    Full_name = textInput.value;
+    // Додаткові дії можна додати тут, якщо потрібно
+  });
+
+  // Обробка подій для віджета календаря:
+  // Фокус – перетворення на поле типу date з відповідним форматом
+  dateInput.addEventListener('focus', function() {
+    this.type = 'date';
+    this.value = convertDateToInputFormat(date);
+  });
+
+  // Зміна дати – оновлення глобальної змінної
+  dateInput.addEventListener('change', function() {
+    date = convertDateToDisplayFormat(this.value);
+  });
+
+  // Втрата фокусу – повернення до типу text та відображення дати
+  dateInput.addEventListener('blur', function() {
+    this.type = 'text';
+    this.value = date;
+  });
+</script>
+  
 </body>
 </html>
