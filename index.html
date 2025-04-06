@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вебсторінка з 4 полями</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Підключення Font Awesome -->
     <style>
         /* Загальні стилі для сторінки */
         body, html {
@@ -82,14 +83,26 @@
         }
 
         /* Стиль для введення дати */
-        input[type="text"].date-display {
+        .date-display-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .date-display {
             padding: 10px;
             margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
-            width: 11ch; /* Ширина комірки для дати становить 11 символів */
+            width: 11ch; /* Ширина комірки для дати */
             background-color: #f0f0f0; /* Фоновий колір для поля */
             cursor: not-allowed; /* Курсор "неможливо" для заборони редагування */
+            text-align: center;
+        }
+
+        .calendar-icon {
+            font-size: 18px;
+            margin-right: 8px;
+            cursor: pointer;
         }
 
         /* Стиль для текстового поля */
@@ -98,7 +111,7 @@
             margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
-            width: 25ch; /* Ширина комірки для тексту становить 25 символів */
+            width: 25ch; /* Ширина комірки для тексту */
         }
 
         /* Відступи між полями */
@@ -117,9 +130,12 @@
                     <label for="text-input">Текст:</label>
                     <input type="text" id="text-input" class="text-input" placeholder="Введіть текст" />
                     
-                    <!-- Друге поле: тільки відображення дати -->
+                    <!-- Друге поле: тільки відображення дати з піктограмою календаря -->
                     <label for="date-display">Дата:</label>
-                    <input type="text" id="date-display" class="date-display" readonly />
+                    <div class="date-display-container">
+                        <i class="fas fa-calendar-alt calendar-icon" id="calendar-icon"></i>
+                        <input type="text" id="date-display" class="date-display" readonly />
+                    </div>
                 </div>
             </div>
             <div class="field field2"></div>
@@ -149,8 +165,27 @@
         date = getCurrentDate();
         document.getElementById('date-display').value = date;
 
-        // Відображаємо актуальну дату в полі для введення
-        document.getElementById('date-display').value = date;
+        // Функція для відкриття календаря при натисканні на іконку
+        document.getElementById('calendar-icon').addEventListener('click', function () {
+            // Відкриваємо діалогове вікно для вибору дати
+            const inputDate = document.createElement('input');
+            inputDate.setAttribute('type', 'date');
+            inputDate.value = date.split('.').reverse().join('-'); // Формат для date input
+            inputDate.style.position = 'absolute';
+            inputDate.style.top = '-9999px'; // Приховуємо його за межами екрана
+            document.body.appendChild(inputDate);
+            
+            // Відкриваємо календар
+            inputDate.click();
+
+            // При виборі нової дати, оновлюємо значення
+            inputDate.addEventListener('change', function () {
+                const newDate = inputDate.value.split('-').reverse().join('.');
+                date = newDate;
+                document.getElementById('date-display').value = date;
+                document.body.removeChild(inputDate); // Прибираємо тимчасове поле для вибору
+            });
+        });
     </script>
 </body>
 </html>
