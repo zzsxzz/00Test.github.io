@@ -1,177 +1,168 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вебсторінка з 4 полями</title>
-    <style>
-        /* Загальні стилі для сторінки */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Контейнер для всіх рядків */
-        .container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            width: 100%;
-            max-width: 1920px; /* максимальна ширина контейнера */
-            min-width: 960px; /* мінімальна ширина контейнера */
-            box-sizing: border-box;
-        }
-
-        /* Перший рядок */
-        .row1 {
-            display: flex;
-            height: 35%;
-            width: 100%;
-        }
-
-        /* Другий рядок */
-        .row2 {
-            display: flex;
-            height: 25%;
-            width: 100%;
-        }
-
-        /* Третій рядок */
-        .row3 {
-            display: flex;
-            height: 40%;
-            width: 100%;
-        }
-
-        /* Стилі для полів */
-        .field {
-            flex-grow: 1;
-            box-sizing: border-box;
-        }
-
-        /* Поля з різними кольорами */
-        .field1 {
-            background-color: red;
-            margin-right: 20px;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        .field2 {
-            background-color: blue;
-        }
-
-        .field3 {
-            background-color: yellow;
-        }
-
-        .field4 {
-            background-color: black;
-        }
-
-        /* Стиль для форм */
-        .form-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Стиль для введення дати */
-        .date-display-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .date-display {
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 16ch; /* Ширина комірки для дати */
-            background-color: #f0f0f0; /* Фоновий колір для поля */
-            text-align: center;
-        }
-
-        /* Стиль для текстового поля */
-        .text-input {
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 25ch; /* Ширина комірки для тексту */
-        }
-
-        /* Відступи між полями */
-        .form-container input {
-            margin-bottom: 10px;
-        }
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вебсторінка з 4 полями</title>
+  <style>
+    /* Загальні стилі для сторінки */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* Контейнер для всіх рядків */
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      max-width: 1920px;
+      min-width: 960px;
+      box-sizing: border-box;
+    }
+    
+    /* Перший рядок */
+    .row1 {
+      display: flex;
+      height: 35%;
+      width: 100%;
+    }
+    
+    /* Другий рядок */
+    .row2 {
+      display: flex;
+      height: 25%;
+      width: 100%;
+    }
+    
+    /* Третій рядок */
+    .row3 {
+      display: flex;
+      height: 40%;
+      width: 100%;
+    }
+    
+    /* Стилі для полів */
+    .field {
+      flex-grow: 1;
+      box-sizing: border-box;
+    }
+    
+    /* Поля з різними кольорами */
+    .field1 {
+      background-color: red;
+      margin-right: 20px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    
+    .field2 { background-color: blue; }
+    .field3 { background-color: yellow; }
+    .field4 { background-color: black; }
+    
+    /* Стиль для форм */
+    .form-container {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Стиль для введення дати */
+    .date-display {
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 16ch; /* Ширина для 16 символів */
+      background-color: #f0f0f0;
+      text-align: center;
+    }
+    
+    /* Стиль для текстового поля */
+    .text-input {
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 25ch; /* Ширина для 25 символів */
+    }
+    
+    /* Відступи між полями */
+    .form-container input {
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row1">
-            <div class="field field1">
-                <div class="form-container">
-                    <!-- Перше поле: текстове введення -->
-                    <label for="text-input">Текст:</label>
-                    <input type="text" id="text-input" class="text-input" placeholder="Введіть текст" />
-                    
-                    <!-- Друге поле: введення дати -->
-                    <label for="date-input">Дата:</label>
-                    <input type="text" id="date-input" class="date-display" placeholder="dd.mm.yyyy" />
-                </div>
-            </div>
-            <div class="field field2"></div>
+  <div class="container">
+    <div class="row1">
+      <div class="field field1">
+        <div class="form-container">
+          <!-- Поле для введення тексту -->
+          <label for="text-input">Текст:</label>
+          <input type="text" id="text-input" class="text-input" placeholder="Введіть текст" />
+          
+          <!-- Поле для відображення дати -->
+          <label for="date-input">Дата:</label>
+          <input type="text" id="date-input" class="date-display" placeholder="dd.mm.yyyy" />
         </div>
-        <div class="row2">
-            <div class="field field3"></div>
-        </div>
-        <div class="row3">
-            <div class="field field4"></div>
-        </div>
+      </div>
+      <div class="field field2"></div>
     </div>
-
-    <script>
-        // Змінна для зберігання дати
-        let date = '';
-
-        // Функція для отримання поточної дати в форматі dd.mm.yyyy
-        function getCurrentDate() {
-            const today = new Date();
-            const day = String(today.getDate()).padStart(2, '0');
-            const month = String(today.getMonth() + 1).padStart(2, '0'); // Місяці від 0 до 11
-            const year = today.getFullYear();
-            return `${day}.${month}.${year}`;
-        }
-
-        // Встановлюємо поточну дату в поле
-        date = getCurrentDate();
-        document.getElementById('date-input').value = date;
-
-        // Додаємо подію для відображення календаря при натисканні на поле
-        document.getElementById('date-input').addEventListener('focus', function () {
-            this.type = 'date'; // Встановлюємо тип "date", щоб відобразити календар
-        });
-
-        // Додаємо подію для збереження текстового формату після втрати фокусу
-        document.getElementById('date-input').addEventListener('blur', function () {
-            // Якщо поле порожнє, ставимо поточну дату
-            if (this.value === '') {
-                this.value = getCurrentDate(); // Якщо дата не вибрана, ставимо актуальну
-            } else {
-                const date = new Date(this.value);
-                const formattedDate = String(date.getDate()).padStart(2, '0') + '.' +
-                    String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
-                this.value = formattedDate; // Оновлюємо значення
-            }
-            this.type = 'text'; // Повертаємо тип на "text"
-        });
-    </script>
+    <div class="row2">
+      <div class="field field3"></div>
+    </div>
+    <div class="row3">
+      <div class="field field4"></div>
+    </div>
+  </div>
+  
+  <script>
+    // Глобальна змінна для зберігання останньої вибраної дати
+    let date = '';
+    
+    // Функція для отримання поточної дати у форматі dd.mm.yyyy
+    function getCurrentDate() {
+      const today = new Date();
+      const day = String(today.getDate()).padStart(2, '0');
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const year = today.getFullYear();
+      return `${day}.${month}.${year}`;
+    }
+    
+    // Ініціалізація поля для дати з поточною датою
+    const dateInput = document.getElementById('date-input');
+    date = getCurrentDate();
+    dateInput.value = date;
+    
+    // При фокусі змінюємо тип поля на "date" та конвертуємо дату у формат YYYY-MM-DD
+    dateInput.addEventListener('focus', function() {
+      this.type = 'date';
+      const parts = date.split('.');
+      if(parts.length === 3) {
+        this.value = `${parts[2]}-${parts[1]}-${parts[0]}`;
+      }
+    });
+    
+    // При зміні дати через віджет оновлюємо глобальну змінну
+    dateInput.addEventListener('change', function() {
+      const parts = this.value.split('-'); // очікується формат YYYY-MM-DD
+      if(parts.length === 3) {
+        date = `${parts[2]}.${parts[1]}.${parts[0]}`;
+      }
+    });
+    
+    // При втраті фокусу повертаємо тип поля на "text" та оновлюємо відображення дати
+    dateInput.addEventListener('blur', function() {
+      this.type = 'text';
+      this.value = date;
+    });
+  </script>
 </body>
 </html>
