@@ -22,8 +22,8 @@
       flex-direction: column;
       height: 100%;
       width: 100%;
-      max-width: 1920px;
-      min-width: 960px;
+      max-width: 1920px; /* максимальна ширина контейнера */
+      min-width: 960px;  /* мінімальна ширина контейнера */
       box-sizing: border-box;
     }
     
@@ -65,7 +65,10 @@
     
     .field2 { background-color: blue; }
     .field3 { background-color: yellow; }
-    .field4 { background-color: black; }
+    .field4 { 
+      background-color: black;
+      padding: 20px;
+    }
     
     /* Стиль для форм */
     .form-container {
@@ -97,6 +100,13 @@
     .form-container input {
       margin-bottom: 10px;
     }
+    
+    /* Стиль для блоку відображення інформації в Поле4 */
+    #display-info {
+      color: white;
+      font-size: 16px;
+      white-space: pre-line;
+    }
   </style>
 </head>
 <body>
@@ -108,7 +118,7 @@
           <label for="text-input">Текст:</label>
           <input type="text" id="text-input" class="text-input" placeholder="Введіть текст" />
           
-          <!-- Поле для відображення дати -->
+          <!-- Поле для введення дати -->
           <label for="date-input">Дата:</label>
           <input type="text" id="date-input" class="date-display" placeholder="dd.mm.yyyy" />
         </div>
@@ -119,13 +129,17 @@
       <div class="field field3"></div>
     </div>
     <div class="row3">
-      <div class="field field4"></div>
+      <div class="field field4">
+        <!-- Блок для відображення актуальних змінних -->
+        <div id="display-info"></div>
+      </div>
     </div>
   </div>
   
   <script>
-    // Глобальна змінна для зберігання останньої вибраної дати
+    // Глобальні змінні для зберігання дати та тексту
     let date = '';
+    let Full_name = '';
     
     // Функція для отримання поточної дати у форматі dd.mm.yyyy
     function getCurrentDate() {
@@ -136,33 +150,51 @@
       return `${day}.${month}.${year}`;
     }
     
+    // Функція для оновлення відображення інформації в Поле4
+    function updateInfoDisplay() {
+      document.getElementById('display-info').innerText = `Date: ${date}\nFull Name: ${Full_name}`;
+    }
+    
     // Ініціалізація поля для дати з поточною датою
     const dateInput = document.getElementById('date-input');
     date = getCurrentDate();
     dateInput.value = date;
     
-    // При фокусі змінюємо тип поля на "date" та конвертуємо дату у формат YYYY-MM-DD
+    // Оновлення змінної Full_name при введенні тексту
+    const textInput = document.getElementById('text-input');
+    textInput.addEventListener('input', function() {
+      Full_name = this.value;
+      updateInfoDisplay();
+    });
+    
+    // Обробка подій для віджета календаря:
+    // При фокусі змінюємо тип поля на "date" та конвертуємо дату в формат YYYY-MM-DD
     dateInput.addEventListener('focus', function() {
       this.type = 'date';
       const parts = date.split('.');
-      if(parts.length === 3) {
+      if (parts.length === 3) {
         this.value = `${parts[2]}-${parts[1]}-${parts[0]}`;
       }
     });
     
-    // При зміні дати через віджет оновлюємо глобальну змінну
+    // При зміні дати через віджет оновлюємо глобальну змінну та відображення
     dateInput.addEventListener('change', function() {
-      const parts = this.value.split('-'); // очікується формат YYYY-MM-DD
-      if(parts.length === 3) {
+      const parts = this.value.split('-'); // формат YYYY-MM-DD
+      if (parts.length === 3) {
         date = `${parts[2]}.${parts[1]}.${parts[0]}`;
       }
+      updateInfoDisplay();
     });
     
-    // При втраті фокусу повертаємо тип поля на "text" та оновлюємо відображення дати
+    // При втраті фокусу повертаємо тип поля на "text" і відображаємо останню вибрану дату
     dateInput.addEventListener('blur', function() {
       this.type = 'text';
       this.value = date;
+      updateInfoDisplay();
     });
+    
+    // Початкове оновлення інформації
+    updateInfoDisplay();
   </script>
 </body>
 </html>
