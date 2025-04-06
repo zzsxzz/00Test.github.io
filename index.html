@@ -100,13 +100,6 @@
     .form-container input {
       margin-bottom: 10px;
     }
-    
-    /* Стиль для блоку відображення інформації в Поле4 */
-    #display-info {
-      color: white;
-      font-size: 16px;
-      white-space: pre-line;
-    }
   </style>
 </head>
 <body>
@@ -130,8 +123,7 @@
     </div>
     <div class="row3">
       <div class="field field4">
-        <!-- Блок для відображення актуальних змінних -->
-        <div id="display-info"></div>
+        <!-- Поле4 тепер порожнє -->
       </div>
     </div>
   </div>
@@ -150,11 +142,6 @@
       return `${day}.${month}.${year}`;
     }
     
-    // Функція для оновлення відображення інформації в Поле4
-    function updateInfoDisplay() {
-      document.getElementById('display-info').innerText = `Date: ${date}\nFull Name: ${Full_name}`;
-    }
-    
     // Ініціалізація поля для дати з поточною датою
     const dateInput = document.getElementById('date-input');
     date = getCurrentDate();
@@ -164,7 +151,7 @@
     const textInput = document.getElementById('text-input');
     textInput.addEventListener('input', function() {
       Full_name = this.value;
-      updateInfoDisplay();
+      // Більше не оновлюємо відображення в Поле4
     });
     
     // Обробка подій для віджета календаря:
@@ -177,24 +164,19 @@
       }
     });
     
-    // При зміні дати через віджет оновлюємо глобальну змінну та відображення
+    // При зміні дати через віджет оновлюємо глобальну змінну
     dateInput.addEventListener('change', function() {
       const parts = this.value.split('-'); // формат YYYY-MM-DD
       if (parts.length === 3) {
         date = `${parts[2]}.${parts[1]}.${parts[0]}`;
       }
-      updateInfoDisplay();
     });
     
     // При втраті фокусу повертаємо тип поля на "text" і відображаємо останню вибрану дату
     dateInput.addEventListener('blur', function() {
       this.type = 'text';
       this.value = date;
-      updateInfoDisplay();
     });
-    
-    // Початкове оновлення інформації
-    updateInfoDisplay();
   </script>
 </body>
 </html>
