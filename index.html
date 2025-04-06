@@ -81,27 +81,15 @@
             flex-direction: column;
         }
 
-        /* Стиль для введення дати */
-        input[type="text"].date-input {
+        /* Стиль для поля дати */
+        .date-display {
             padding: 10px;
             margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
             width: auto; /* ширина підлаштовується під вміст */
-        }
-
-        /* Стиль для текстового поля */
-        .text-input {
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 25ch; /* Фіксована ширина для 25 символів */
-        }
-
-        /* Відступи між полями */
-        .form-container input {
-            margin-bottom: 10px;
+            background-color: #f0f0f0; /* фоновий колір для поля */
+            cursor: not-allowed; /* курсор "неможливо" для заборони редагування */
         }
 
     </style>
@@ -111,9 +99,9 @@
         <div class="row1">
             <div class="field field1">
                 <div class="form-container">
-                    <!-- Перше поле: введення дати -->
-                    <label for="date-input">Дата:</label>
-                    <input type="text" id="date-input" class="date-input" placeholder="dd.mm.yyyy" />
+                    <!-- Перше поле: тільки відображення дати -->
+                    <label for="date-display">Дата:</label>
+                    <input type="text" id="date-display" class="date-display" readonly />
                     
                     <!-- Друге поле: текстове введення -->
                     <label for="text-input">Текст:</label>
@@ -145,29 +133,10 @@
 
         // Встановлюємо поточну дату в поле
         date = getCurrentDate();
-        document.getElementById('date-input').value = date;
+        document.getElementById('date-display').value = date;
 
-        // Додаємо подію для відображення календаря при фокусі на полі
-        document.getElementById('date-input').addEventListener('focus', function () {
-            this.type = 'date';
-        });
-
-        // Додаємо подію для збереження текстового формату після втрати фокусу
-        document.getElementById('date-input').addEventListener('blur', function () {
-            if (this.value === '') {
-                this.value = getCurrentDate(); // Якщо дата не вибрана, ставимо актуальну
-            } else {
-                const dateValue = new Date(this.value);
-                const formattedDate = String(dateValue.getDate()).padStart(2, '0') + '.' +
-                    String(dateValue.getMonth() + 1).padStart(2, '0') + '.' + dateValue.getFullYear();
-                date = formattedDate; // Оновлюємо значення дати
-                this.value = date;
-            }
-            this.type = 'text'; // Повертаємо поле назад в текстовий формат
-        });
-
-        // Відображаємо актуальну дату на сторінці
-        document.getElementById('date-input').value = date;
+        // Відображаємо актуальну дату в полі для введення
+        document.getElementById('date-display').value = date;
     </script>
 </body>
 </html>
